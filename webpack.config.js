@@ -1,5 +1,3 @@
-'use strict';
-
 var _ = require('lodash');
 var webpack = require('webpack');
 var banner = require('./utils/banner');
@@ -25,10 +23,7 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.(js|jsx)$/,
-      loader: 'jsx-loader?harmony'
-    }, {
-      test: /\.(js|jsx)$/,
-      loader: 'jsx-loader?insertPragma=React.DOM'
+      loader: 'babel-loader'
     }]
   },
   resolve: {
