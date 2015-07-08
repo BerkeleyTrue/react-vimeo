@@ -83,13 +83,13 @@ export default React.createClass({
   },
 
   renderImage() {
-    if (this.state.imageLoaded || this.state.showingVideo) {
+    if (this.state.showingVideo || !this.state.imageLoaded) {
       return;
     }
 
     const style = {
       backgroundImage: `url(${this.state.thumb})`,
-      display: this.state.showingVideo ? 'block' : 'none',
+      display: !this.state.showingVideo ? 'block' : 'none',
       height: '100%',
       width: '100%'
     };
