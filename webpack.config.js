@@ -34,6 +34,14 @@ module.exports = {
     Buffer: false
   },
 
+  resolve: {
+    extensions: [
+      '',
+      '.js',
+      '.jsx'
+    ]
+  },
+
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
