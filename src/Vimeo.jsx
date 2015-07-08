@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import debugFactory from 'debug';
 
-import PlayButton from './Play-Button.jsx';
-import Spinner from './Spinner.jsx';
+import PlayButton from './Play-Button';
+import Spinner from './Spinner';
 
 import { get } from './ajax';
 
@@ -64,7 +64,7 @@ export default React.createClass({
   },
 
   fetchVimeoData() {
-    if (!this.state.imageLoaded) {
+    if (this.state.imageLoaded) {
       return;
     }
     const id = this.props.videoId;
@@ -83,7 +83,7 @@ export default React.createClass({
   },
 
   renderImage() {
-    if (!this.state.imageLoaded || this.state.showingVideo) {
+    if (this.state.imageLoaded || this.state.showingVideo) {
       return;
     }
 
