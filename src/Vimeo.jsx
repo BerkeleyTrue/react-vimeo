@@ -1,9 +1,12 @@
 import React, { PropTypes } from 'react';
+import debugFactory from 'debug';
 
 import PlayButton from './Play-Button.jsx';
 import Spinner from './Spinner.jsx';
 
-import ajax from './ajax';
+import { get } from './ajax';
+
+const debug = debugFactory('vimeo:player');
 
 export default React.createClass({
   displayName: 'Vimeo',
@@ -18,7 +21,7 @@ export default React.createClass({
 
   getDefaultProps() {
     return {
-      className: 'video'
+      className: 'vimeo'
     };
   },
 
@@ -66,9 +69,10 @@ export default React.createClass({
     }
     const id = this.props.videoId;
 
-    ajax.get({
+    get({
       url: `//vimeo.com/api/v2/video/${id}.json`,
       onSuccess: (res) => {
+        debug('ajax response', res);
         this.setState({
           thumb: res[0].thumbnail_large,
           imageLoaded: true
@@ -91,7 +95,7 @@ export default React.createClass({
     };
 
     return (
-      <div className='video-image' style={ style }>
+      <div className='vimeo-image' style={ style }>
         <PlayButton onClick={ this.playVideo } />
       </div>
     );
@@ -109,7 +113,7 @@ export default React.createClass({
     };
 
     return (
-      <div className='video-embed' style={ embedVideoStyle }>
+      <div className='vimeo-embed' style={ embedVideoStyle }>
         <iframe frameBorder='0' src={ this.getIframeUrl() }></iframe>
       </div>
     );

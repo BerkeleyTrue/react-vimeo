@@ -11,7 +11,7 @@ export default React.createClass({
   render() {
     return (
       <button
-        className='video-play-button'
+        className='vimeo-play-button'
         onClick={ this.props.onClick }
         type='button'>
         <svg
