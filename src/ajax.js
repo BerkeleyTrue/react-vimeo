@@ -3,7 +3,7 @@ import debugFactory from 'debug';
 const errMessage = { error: 'Sorry, an error occurred on the server' };
 const debug = debugFactory('vimeo:ajax');
 
-export default function get(opts) {
+export function get(opts) {
   const url = opts.url;
   const onSuccess = opts.onSuccess;
   const onError = opts.onError;
