@@ -1,7 +1,7 @@
 {
-  "name": "react-video",
+  "name": "react-vimeo",
   "version": "0.0.1",
-  "description": "React component to load video from Vimeo or Youtube across any device",
+  "description": "React component to load video from Vimeo",
   "author": {
     "name": "Berkeley Martinez",
     "email": "berkeley@r3dm.com",
