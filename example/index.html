@@ -28,25 +28,15 @@
   </head>
   <body>
     <div class="content">
-      <div id="video-youtube"></div>
-      <div id="video-vimeo"></div>
+      <div id="vimeo"></div>
     </div>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react-with-addons.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.12.2/JSXTransformer.js"></script>
-    <script src="react-video.js"></script>
-    <script type="text/jsx">
-      /** @jsx React.DOM */
-      var Video = ReactVideo;
-
+    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="vimeo.js"></script>
+    <script type="text/javascript">
       React.render(
-        <Video videoId='jhg8XRTorYg' />,
-        document.getElementById('video-youtube')
-      );
-
-      React.render(
-        <Video videoId='108843586' />,
-        document.getElementById('video-vimeo')
+        React.createElement(ReactVimeo, { videoId: '108843586' }),
+        document.getElementById('vimeo')
       );
     </script>
   </body>

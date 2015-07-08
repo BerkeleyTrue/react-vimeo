@@ -1,39 +1,43 @@
-var _ = require('lodash');
 var webpack = require('webpack');
-var banner = require('./utils/banner');
-var LIB_NAME = 'react-video';
-var GLOBAL_VAR = 'ReactVideo';
+
+var banner = require('./banner');
 
 module.exports = {
-  entry: './lib/' + LIB_NAME + '.jsx',
+
   output: {
-    path: __dirname + '/dist',
-    filename: LIB_NAME + '.js',
-    libraryTarget: 'umd',
-    library: GLOBAL_VAR
+    library: 'ReactVimeo',
+    libraryTarget: 'umd'
   },
-  externals: {
-    react: {
-      root: 'React',
-      commonjs: 'react',
-      commonjs2: 'react',
-      amd: 'react'
-    }
-  },
-  module: {
-    loaders: [{
-      test: /\.(js|jsx)$/,
-      loader: 'babel-loader'
-    }]
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+
+  externals: [
+    {
+      'react': {
+        root: 'React',
+        commonjs2: 'react',
+        commonjs: 'react',
+        amd: 'react'
       }
+    }
+  ],
+
+  module: {
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      }
+    ]
+  },
+
+  node: {
+    Buffer: false
+  },
+
+  plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
     new webpack.BannerPlugin(banner, { raw: true, entryOnly: true })
   ]
