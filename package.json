@@ -31,7 +31,7 @@
     "build-npm": "babel src --out-dir lib",
     "build-umd": "NODE_ENV=production webpack src/Vimeo.jsx lib/umd/ReactVimeo.js && NODE_ENV=production webpack -p src/Vimeo.jsx lib/umd/ReactVimeo.min.js",
     "lint": "eslint .",
-    "prepublish": "npm run build",
+    "prepublish": "npm run test && npm run build",
     "test": "npm run lint"
   },
   "peerDependencies": {
