@@ -27,9 +27,11 @@
   ],
   "scripts": {
     "build": "npm run build-npm && npm run build-umd && npm run build-css",
-    "build-css": "stylus --use nib src/Vimeo.styl -o lib/ && stylus --compress --use nib src/Vimeo.styl -o lib/Vimeo.min.css && cp src/Vimeo.styl lib/Vimeo.styl",
+    "build-css": "stylus --use nib lib/Vimeo.styl -o lib/ && stylus --compress --use nib lib/Vimeo.styl -o lib/Vimeo.min.css && npm run build-css-size",
+    "build-css-size": "echo \"gzipped, the css build is `gzip -c lib/Vimeo.min.css | wc -c | sed -e 's/^[[:space:]]*//'` bytes\"",
     "build-npm": "babel src --out-dir lib",
-    "build-umd": "NODE_ENV=production webpack src/Vimeo.jsx lib/umd/ReactVimeo.js && NODE_ENV=production webpack -p src/Vimeo.jsx lib/umd/ReactVimeo.min.js",
+    "build-umd": "NODE_ENV=production webpack src/Vimeo.jsx lib/umd/ReactVimeo.js && NODE_ENV=production webpack -p src/Vimeo.jsx lib/umd/ReactVimeo.min.js && npm run build-size",
+    "build-size": "echo \"gzipped, the umd build is `gzip -c lib/umd/ReactVimeo.min.js | wc -c | sed -e 's/^[[:space:]]*//'` bytes\"",
     "lint": "eslint .",
     "prepublish": "npm run test && npm run build",
     "test": "npm run lint"
