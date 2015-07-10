@@ -56,12 +56,24 @@ For more details, check out the API below.
 
 ## Component API
 
-`<Video>` component:
+`<Vimeo>` component:
 
 Property | Type | Default | Required | Description
 -------- | ---- | ------- | -------- |-----------
-videoId | `String` | none | yes | The video ID
-onError | `Function` | noop | no | Callback function if the video can't be loaded
+className | string | 'vimeo' | no | className applied to wrapping div
+onCuechange | func | noop | no | called when the player que changes
+onError | func | noop | no | called if the video metadata (thumbnail) can't be loaded
+onFinish | func | noop | no | called when video completes
+onLoadProgress | func | noop | no | called when part of video has loaded
+onPause | func | noop | no | called when video is paused
+onPlay | func | noop | no | called when video is played
+onPlayProgress | func | noop | no | called when video play has progressed
+onReady | func | noop | no | called when video has loaded and is ready to play. other event functions will not be called before this one other than onError 
+onSeek | func | noop | no | called when user seeks ahead in video
+videoId | string | none | yes | The vimeo ID
+
+Interactive api (play/pause actions, seek to `n`, etc..) to come in future versions
+
 
 ## License
 
