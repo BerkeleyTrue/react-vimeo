@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import keyMirror from 'keymirror';
 import debugFactory from 'debug';
 
 import PlayButton from './Play-Button';
@@ -7,6 +8,29 @@ import Spinner from './Spinner';
 import { get } from './ajax';
 
 const debug = debugFactory('vimeo:player');
+const noop = () => {};
+const playerEvents = keyMirror({
+  cuechange: null,
+  finish: null,
+  loadProgress: null,
+  pause: null,
+  play: null,
+  playProgress: null,
+  seek: null
+});
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.substring(1);
+}
+
+function getFuncForEvent(event, props) {
+  return props['on' + capitalize(event)];
+}
+
+function post(method, value, player, playerOrigin) {
+  player.contentWindow.postMessage({ method, value }, playerOrigin);
+  return player;
+}
 
 export default React.createClass({
   displayName: 'Vimeo',
@@ -14,30 +38,42 @@ export default React.createClass({
   propTypes: {
     className: PropTypes.string,
     loading: PropTypes.element,
+    onCuechange: PropTypes.func,
     onError: PropTypes.func,
+    onFinish: PropTypes.func,
+    onLoadProgress: PropTypes.func,
+    onPause: PropTypes.func,
+    onPlay: PropTypes.func,
+    onPlayProgress: PropTypes.func,
+    onReady: PropTypes.func,
+    onSeek: PropTypes.func,
     playButton: PropTypes.node,
     videoId: PropTypes.string.isRequired
   },
 
   getDefaultProps() {
-    return {
-      className: 'vimeo'
-    };
+    const defaults = Object.keys(playerEvents)
+      .concat(['ready'])
+      .reduce((defaults, event) => {
+        defaults['on' + capitalize(event)] = noop;
+        return defaults;
+      }, {});
+
+    defaults.className = 'vimeo';
+    return defaults;
   },
 
   getInitialState() {
     return {
-      thumb: null,
       imageLoaded: false,
-      showingVideo: false
+      playerOrigin: '*',
+      showingVideo: false,
+      thumb: null
     };
   },
 
   componentWillReceiveProps(nextProps) {
-    if (
-      nextProps.className !== this.props.className ||
-      nextProps.videoId !== this.props.videoId
-    ) {
+    if (nextProps.videoId !== this.props.videoId) {
       this.setState({
         thumb: null,
         imageLoaded: false,
@@ -52,6 +88,62 @@ export default React.createClass({
 
   componentDidUpdate() {
     this.fetchVimeoData();
+  },
+
+  componentWillUnmount() {
+    const removeEventListener = typeof window !== 'undefined' ?
+      ::window.removeEventListener :
+      noop;
+
+    removeEventListener('message', this.onMessage);
+  },
+
+  addMessageListener() {
+    const addEventListener = typeof window !== 'undefined' ?
+      ::window.addEventListener :
+      noop;
+
+    addEventListener('message', this.onMessage);
+  },
+
+  onMessage(e) {
+    const { onReady } = this.props;
+    const { playerOrigin } = this.state;
+
+    if (playerOrigin === '*') {
+      this.setState({
+        playerOrigin: e.origin
+      });
+    }
+
+    // Handle messages from the vimeo player only
+    if (!(/^https?:\/\/player.vimeo.com/).test(e.origin)) {
+      return false;
+    }
+
+    const dats = JSON.parse(e.data);
+
+    if (dats.event === 'ready') {
+      const player = React.findDOMNode(this.refs.player);
+      debug('player ready');
+      this.onReady(
+        player,
+        playerOrigin === '*' ? e.origin : playerOrigin
+      );
+      return onReady(dats);
+    }
+
+    const potentialFunc = getFuncForEvent(dats.event, this.props);
+
+    if (typeof potentialFunc === 'function') {
+      potentialFunc(dats);
+    }
+  },
+
+  onReady(player, playerOrigin) {
+    Object.keys(playerEvents).forEach(event => {
+      post('addEventListener', event, player, playerOrigin);
+    });
   },
 
   playVideo(e) {
@@ -95,7 +187,9 @@ export default React.createClass({
     };
 
     return (
-      <div className='vimeo-image' style={ style }>
+      <div
+        className='vimeo-image'
+        style={ style }>
         <PlayButton onClick={ this.playVideo } />
       </div>
     );
@@ -106,6 +200,8 @@ export default React.createClass({
       return;
     }
 
+    this.addMessageListener();
+
     const embedVideoStyle = {
       display: this.state.showingVideo ? 'block' : 'none',
       height: '100%',
@@ -113,8 +209,13 @@ export default React.createClass({
     };
 
     return (
-      <div className='vimeo-embed' style={ embedVideoStyle }>
-        <iframe frameBorder='0' src={ this.getIframeUrl() }></iframe>
+      <div
+        className='vimeo-embed'
+        style={ embedVideoStyle }>
+        <iframe
+          frameBorder='0'
+          ref='player'
+          src={ this.getIframeUrl() } />
       </div>
     );
   },
