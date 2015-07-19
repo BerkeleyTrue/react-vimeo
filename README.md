@@ -1,6 +1,6 @@
 # React Vimeo
 
-![Git release](http://img.shields.io/github/release/freecodecamp/react-vimeo.svg?style=flat)
+[![NPM](https://nodei.co/npm/react-vimeo.png?downloads=true)](https://nodei.co/npm/react-vimeo/)
 
 ## Usage
 
