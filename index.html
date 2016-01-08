@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Example | React Video</title>
+    <title>React Video</title>
     <link rel="stylesheet" href="http://necolas.github.io/normalize.css/3.0.1/normalize.css">
     <link rel="stylesheet" href="/lib/Vimeo.css">
     <link rel="stylesheet" href="/react-vimeo/lib/Vimeo.css">
@@ -11,24 +11,35 @@
       @media screen and (min-width: 600px) {
         .content {
           width: 100%;
+          margin: 0 auto;
+          text-align: center;
         }
       }
 
       @media screen and (min-width: 960px) {
         .content {
           width: 70%;
+          margin: 0 auto;
         }
       }
 
       #vimeo {
-        width: 80%;
-        margin: 50px;
+        width: 100%;
       }
     </style>
   </head>
   <body>
+    <div class='content'>
+      <h1>Async and Streaming JavaScript, We’re All Doing it Wrong! by Matthew Podwysocki</h1>
+    </div>
+    <div class='content'>
+      <p>Brought to you by React-Vimeo</p>
+    </div>
     <div class="content">
       <div id="vimeo"></div>
+    </div>
+    <div class='content'>
+        <h4>Don't forget to be Awesome!</h4>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.6/react.js"></script>
