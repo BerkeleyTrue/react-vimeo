@@ -1,6 +1,6 @@
 {
   "name": "react-vimeo",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "React component to load video from Vimeo",
   "author": {
     "name": "Berkeley Martinez",
@@ -37,7 +37,7 @@
     "test": "npm run lint"
   },
   "peerDependencies": {
-    "react": ">=0.13.0"
+    "react": ">=0.14.0"
   },
   "devDependencies": {
     "babel-core": "^5.6.15",
@@ -50,12 +50,15 @@
     "lodash": "^2.4.1",
     "nib": "^1.1.0",
     "node-libs-browser": "^0.5.2",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6",
     "stylus": "^0.51.1",
     "webpack": "^1.10.1",
     "yargs": "^1.3.2"
   },
   "dependencies": {
     "debug": "^2.2.0",
+    "jsonp": "^0.2.0",
     "keymirror": "^0.1.1"
   }
 }

@@ -1,11 +1,10 @@
 import React, { PropTypes } from 'react';
 import keyMirror from 'keymirror';
+import jsonp from 'jsonp';
 import debugFactory from 'debug';
 
 import PlayButton from './Play-Button';
 import Spinner from './Spinner';
-
-import { get } from './ajax';
 
 const debug = debugFactory('vimeo:player');
 const noop = () => {};
@@ -24,12 +23,16 @@ function capitalize(str) {
 }
 
 function getFuncForEvent(event, props) {
-  return props['on' + capitalize(event)];
+  return props['on' + capitalize(event)] || (() => {});
 }
 
 function post(method, value, player, playerOrigin) {
-  player.contentWindow.postMessage({ method, value }, playerOrigin);
-  return player;
+  try {
+    player.contentWindow.postMessage({ method, value }, playerOrigin);
+  } catch (err) {
+    return err;
+  }
+  return null;
 }
 
 export default React.createClass({
@@ -106,6 +109,13 @@ export default React.createClass({
     addEventListener('message', this.onMessage);
   },
 
+  onError(err) {
+    if (this.props.onError) {
+      this.props.onError(err);
+    }
+    throw err;
+  },
+
   onMessage(e) {
     const { onReady } = this.props;
     const { playerOrigin } = this.state;
@@ -121,10 +131,16 @@ export default React.createClass({
       return false;
     }
 
-    const dats = JSON.parse(e.data);
+    let dats;
+    try {
+      dats = JSON.parse(e.data);
+    } catch (err) {
+      debug('error parsing message' , err);
+      dats = {};
+    }
 
     if (dats.event === 'ready') {
-      const player = React.findDOMNode(this.refs.player);
+      const { player } = this.refs;
       debug('player ready');
       this.onReady(
         player,
@@ -133,16 +149,15 @@ export default React.createClass({
       return onReady(dats);
     }
 
-    const potentialFunc = getFuncForEvent(dats.event, this.props);
-
-    if (typeof potentialFunc === 'function') {
-      potentialFunc(dats);
-    }
+    getFuncForEvent(dats.event, this.props)(dats);
   },
 
   onReady(player, playerOrigin) {
     Object.keys(playerEvents).forEach(event => {
-      post('addEventListener', event, player, playerOrigin);
+      var err = post('addEventListener', event, player, playerOrigin);
+      if (err) {
+        this.onError(err);
+      }
     });
   },
 
@@ -161,17 +176,23 @@ export default React.createClass({
     }
     const id = this.props.videoId;
 
-    get({
-      url: `//vimeo.com/api/v2/video/${id}.json`,
-      onSuccess: (res) => {
-        debug('ajax response', res);
+    jsonp(
+      `//vimeo.com/api/v2/video/${id}.json`,
+      {
+        prefix: 'vimeo'
+      },
+      (err, res) => {
+        if (err) {
+          debug('jsonp err: ', err.message);
+          this.onError(err);
+        }
+        debug('jsonp response', res);
         this.setState({
           thumb: res[0].thumbnail_large,
           imageLoaded: true
         });
-      },
-      onError: this.props.onError || (() => {})
-    });
+      }
+    );
   },
 
   renderImage() {

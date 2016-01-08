@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Example | React Video</title>
     <link rel="stylesheet" href="http://necolas.github.io/normalize.css/3.0.1/normalize.css">
-    <link rel="stylesheet" href="react-video.css">
+    <link rel="stylesheet" href="/lib/Vimeo.css">
     <style>
       @media screen and (min-width: 600px) {
         .content {
@@ -19,8 +19,7 @@
         }
       }
 
-      #video-youtube,
-      #video-vimeo {
+      #vimeo {
         width: 80%;
         margin: 50px;
       }
@@ -31,11 +30,12 @@
       <div id="vimeo"></div>
     </div>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
-    <script src="vimeo.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.6/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.6/react-dom.js"></script>
+    <script src="/lib/umd/ReactVimeo.js"></script>
     <script type="text/javascript">
-      React.render(
-        React.createElement(ReactVimeo, { videoId: '108843586' }),
+      ReactDOM.render(
+        React.createElement(ReactVimeo, { videoId: '131196784' }),
         document.getElementById('vimeo')
       );
     </script>

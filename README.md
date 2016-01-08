@@ -13,11 +13,11 @@
   );
 ```
 
-To handle errors when something happens, like your video can't be loaded, you can pass a callback with a prop `onError` in the component:
+To handle errors, you can pass a function to the `onError` prop:
 
-```javascript
+```js
   function onError(err) {
-    console.log(err);
+    console.error(err);
   };
 
   React.render(
@@ -25,8 +25,6 @@ To handle errors when something happens, like your video can't be loaded, you ca
     document.querySelector('#your-div')
   );
 ```
-
-If you decide to use just Javascript without any module loader, you can get the global variable `window.ReactVimeo` *(or just `ReactVimeo`)*:
 
 ## Behind the Scene
 
@@ -50,30 +48,13 @@ So, the semantic HTML structure will be something like this:
   </div>
 ```
 
-This is a very simple structure to stylize however you want. So, if you are lost, don't panic, there is a [real functional example](/example) that you can follow.
+This is a very simple structure to stylize however you want. So, if you are lost, don't panic, there is a [real functional example](/index.html) that you can follow.
 
-For more details, check out the API below.
+For more details, check out the API
 
-## Component API
+## API
 
-`<Vimeo>` component:
-
-Property | Type | Default | Required | Description
--------- | ---- | ------- | -------- |-----------
-className | string | 'vimeo' | no | className applied to wrapping div
-onCuechange | func | noop | no | called when the player que changes
-onError | func | noop | no | called if the video metadata (thumbnail) can't be loaded
-onFinish | func | noop | no | called when video completes
-onLoadProgress | func | noop | no | called when part of video has loaded
-onPause | func | noop | no | called when video is paused
-onPlay | func | noop | no | called when video is played
-onPlayProgress | func | noop | no | called when video play has progressed
-onReady | func | noop | no | called when video has loaded and is ready to play. other event functions will not be called before this one other than onError 
-onSeek | func | noop | no | called when user seeks ahead in video
-videoId | string | none | yes | The vimeo ID
-
-Interactive api (play/pause actions, seek to `n`, etc..) to come in future versions
-
+[API](docs/README.md)
 
 ## License
 
