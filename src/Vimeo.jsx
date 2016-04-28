@@ -18,7 +18,7 @@ const playerEvents = keyMirror({
   seek: null
 });
 
-function capitalize(str) {
+function capitalize(str = '') {
   return str.charAt(0).toUpperCase() + str.substring(1);
 }
 
@@ -116,40 +116,41 @@ export default React.createClass({
     throw err;
   },
 
-  onMessage(e) {
+  onMessage({ origin, data }) {
     const { onReady } = this.props;
     const { playerOrigin } = this.state;
 
     if (playerOrigin === '*') {
       this.setState({
-        playerOrigin: e.origin
+        playerOrigin: origin
       });
     }
 
     // Handle messages from the vimeo player only
-    if (!(/^https?:\/\/player.vimeo.com/).test(e.origin)) {
+    if (!(/^https?:\/\/player.vimeo.com/).test(origin)) {
       return false;
     }
 
-    let dats;
-    try {
-      dats = JSON.parse(e.data);
-    } catch (err) {
-      debug('error parsing message' , err);
-      dats = {};
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+      } catch (err) {
+        debug('error parsing message' , err);
+        dats = { event: '' };
+      }
     }
 
-    if (dats.event === 'ready') {
+    if (data.event === 'ready') {
       const { player } = this.refs;
       debug('player ready');
       this.onReady(
         player,
-        playerOrigin === '*' ? e.origin : playerOrigin
+        playerOrigin === '*' ? origin : playerOrigin
       );
-      return onReady(dats);
+      return onReady(data);
     }
 
-    getFuncForEvent(dats.event, this.props)(dats);
+    getFuncForEvent(data.event, this.props)(data);
   },
 
   onReady(player, playerOrigin) {
