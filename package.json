@@ -1,6 +1,6 @@
 {
   "name": "react-vimeo",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React component to load video from Vimeo",
   "author": {
     "name": "Berkeley Martinez",
