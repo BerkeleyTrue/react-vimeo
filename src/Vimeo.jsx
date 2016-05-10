@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, cloneElement } from 'react';
 import keyMirror from 'keymirror';
 import jsonp from 'jsonp';
 import debugFactory from 'debug';
@@ -208,11 +208,13 @@ export default React.createClass({
       width: '100%'
     };
 
+    const playButton = this.props.playButton ? cloneElement(this.props.playButton, {onClick: this.playVideo }) : (<PlayButton onClick={ this.playVideo } />);
+
     return (
       <div
         className='vimeo-image'
         style={ style }>
-        <PlayButton onClick={ this.playVideo } />
+        {playButton}
       </div>
     );
   },
