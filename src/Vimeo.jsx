@@ -51,7 +51,8 @@ export default React.createClass({
     onReady: PropTypes.func,
     onSeek: PropTypes.func,
     playButton: PropTypes.node,
-    videoId: PropTypes.string.isRequired
+    videoId: PropTypes.string.isRequired,
+    playerOptions: PropTypes.object
   },
 
   getDefaultProps() {
@@ -63,6 +64,7 @@ export default React.createClass({
       }, {});
 
     defaults.className = 'vimeo';
+    defaults.playerOptions = { autoplay: 1 };
     return defaults;
   },
 
@@ -168,7 +170,15 @@ export default React.createClass({
   },
 
   getIframeUrl() {
-    return `//player.vimeo.com/video/${this.props.videoId}?autoplay=1`;
+    return `//player.vimeo.com/video/${this.props.videoId}?${this.getIframeUrlQuery()}`;
+  },
+
+  getIframeUrlQuery() {
+    let str = [];
+    Object.keys(this.props.playerOptions).forEach(key => {
+      str.push(`${key}=${this.props.playerOptions[key]}`);
+    });
+    return str.join("&");
   },
 
   fetchVimeoData() {

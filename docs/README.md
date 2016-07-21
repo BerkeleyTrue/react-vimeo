@@ -5,6 +5,7 @@
 Interface props {
     videoId: String,
     className?: String = 'vimeo',
+    playerOptions?: Object = { autoplay: 1 },
     onReady?(data?: Object) => Void,
     onCuechange?(data?: Object) => Void,
     onError?(data?: Object) => Void,
@@ -22,6 +23,9 @@ The Vimeo video ID
 
 ## className: String
 `className` applied to wrapping div
+
+## playerOptions: Object
+Object of player options as specified in Vimeo Player docs: https://developer.vimeo.com/player/embedding#universal-parameters. Will get appended to iframe URL
 
 ## onReady?(data: Object) => Void
 Called when video has loaded and is ready to play.
