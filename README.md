@@ -48,7 +48,7 @@ So, the semantic HTML structure will be something like this:
   </div>
 ```
 
-This is a very simple structure to stylize however you want. So, if you are lost, don't panic, there is a [real functional example](/index.html) that you can follow.
+This is a very simple structure to stylize however you want. So, if you are lost, don't panic, there is an [example live here](http://freecodecamp.github.io/react-vimeo/) that you can follow.
 
 For more details, check out the API
 

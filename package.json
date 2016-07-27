@@ -1,6 +1,6 @@
 {
   "name": "react-vimeo",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React component to load video from Vimeo",
   "author": {
     "name": "Berkeley Martinez",
@@ -26,11 +26,12 @@
     "player"
   ],
   "scripts": {
-    "build": "npm run build-npm && npm run build-umd && npm run build-css",
+    "build": "npm run build-npm && npm run build-umd && npm run build-umd-compact && npm run build-size && npm run build-css",
     "build-css": "stylus --use nib lib/Vimeo.styl -o lib/ && stylus --compress --use nib lib/Vimeo.styl -o lib/Vimeo.min.css && npm run build-css-size",
     "build-css-size": "echo \"gzipped, the css build is `gzip -c lib/Vimeo.min.css | wc -c | sed -e 's/^[[:space:]]*//'` bytes\"",
     "build-npm": "babel src --out-dir lib",
-    "build-umd": "NODE_ENV=production webpack src/Vimeo.jsx lib/umd/ReactVimeo.js && NODE_ENV=production webpack -p src/Vimeo.jsx lib/umd/ReactVimeo.min.js && npm run build-size",
+    "build-umd": "NODE_ENV=production webpack src/Vimeo.jsx lib/umd/ReactVimeo.js",
+    "build-umd-compact": "NODE_ENV=production webpack -p src/Vimeo.jsx lib/umd/ReactVimeo.min.js",
     "build-size": "echo \"gzipped, the umd build is `gzip -c lib/umd/ReactVimeo.min.js | wc -c | sed -e 's/^[[:space:]]*//'` bytes\"",
     "lint": "eslint .",
     "prepublish": "npm run test && npm run build",
@@ -40,21 +41,27 @@
     "react": ">=0.14.0"
   },
   "devDependencies": {
-    "babel-core": "^5.6.15",
-    "babel-eslint": "^3.1.23",
-    "babel-loader": "^5.3.1",
-    "browser-sync": "^1.5.2",
-    "eslint": "^0.24.0",
-    "eslint-plugin-react": "^2.6.4",
-    "jest-cli": "^0.1.18",
-    "lodash": "^2.4.1",
+    "babel": "^6.5.2",
+    "babel-cli": "^6.11.4",
+    "babel-core": "^6.10.4",
+    "babel-eslint": "^6.1.2",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "browser-sync": "^2.13.0",
+    "eslint": "^3.1.0",
+    "eslint-plugin-react": "^5.2.2",
+    "jest-cli": "^13.2.3",
+    "lodash": "^4.13.1",
     "nib": "^1.1.0",
-    "node-libs-browser": "^0.5.2",
-    "react": "^0.14.6",
-    "react-dom": "^0.14.6",
-    "stylus": "^0.51.1",
+    "node-libs-browser": "^1.0.0",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1",
+    "stylus": "^0.54.5",
     "webpack": "^1.10.1",
-    "yargs": "^1.3.2"
+    "yargs": "^4.8.0"
   },
   "dependencies": {
     "debug": "^2.2.0",

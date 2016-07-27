@@ -12,8 +12,8 @@
     "react"
   ],
   "rules": {
-    "indent": [2, 2, { "indentSwitchCase": true }],
-    "no-comma-dangle": 2,
+    "indent": [2, 2, { "SwitchCase": 1 }],
+    "comma-dangle": 2,
     "no-cond-assign": 2,
     "no-console": 0,
     "no-constant-condition": 2,
@@ -21,7 +21,7 @@
     "no-debugger": 2,
     "no-dupe-keys": 2,
     "no-empty": 2,
-    "no-empty-class": 2,
+    "no-empty-character-class": 2,
     "no-ex-assign": 2,
     "no-extra-boolean-cast": 2,
     "no-extra-parens": 0,
@@ -52,7 +52,6 @@
     "no-caller": 2,
     "no-div-regex": 2,
     "no-else-return": 0,
-    "no-empty-label": 2,
     "no-eq-null": 1,
     "no-eval": 2,
     "no-extend-native": 2,
@@ -157,12 +156,11 @@
     ],
     "no-nested-ternary": 2,
     "no-new-object": 2,
-    "no-space-before-semi": 2,
+    "semi-spacing": 2,
     "no-spaced-func": 2,
     "no-ternary": 0,
     "no-trailing-spaces": 1,
     "no-underscore-dangle": 0,
-    "no-wrap-func": 2,
     "one-var": 0,
     "operator-assignment": 0,
     "padded-blocks": 0,
@@ -177,9 +175,12 @@
         "always"
     ],
     "sort-vars": 0,
-    "space-after-keywords": [
+    "keyword-spacing": [
         2,
-        "always"
+        {
+            "after": true,
+            "before": true
+        }
     ],
     "space-before-function-paren": [ 2, "never" ],
     "space-before-blocks": [
@@ -189,7 +190,6 @@
     "space-in-brackets": 0,
     "space-in-parens": 0,
     "space-infix-ops": 2,
-    "space-return-throw-case": 2,
     "space-unary-ops": [
         1,
         {
@@ -197,7 +197,7 @@
             "nonwords": false
         }
     ],
-    "spaced-line-comment": [
+    "spaced-comment": [
         2,
         "always",
         { "exceptions": ["-"] }
@@ -217,7 +217,7 @@
 
     "react/display-name": 1,
     "react/jsx-boolean-value": 1,
-    "react/jsx-quotes": [1, "single", "avoid-escape"],
+    "jsx-quotes": [ 1, "prefer-single" ],
     "react/jsx-no-undef": 1,
     "react/jsx-sort-props": 1,
     "react/jsx-uses-react": 1,
