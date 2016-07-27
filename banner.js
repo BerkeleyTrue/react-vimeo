@@ -1,4 +1,4 @@
-module.exports = require('lodash').template([
+module.exports = require('lodash/template')([
   '/*',
   ' * React-Vimeo - <%= pkg.description %>',
   ' * @version v<%= pkg.version %>',
@@ -6,6 +6,6 @@ module.exports = require('lodash').template([
   ' * @license <%= pkg.license %>',
   ' * @author <%= pkg.author.name %> (<%= pkg.author.url %>)',
   '*/\n'
-].join('\n'), {
+].join('\n'))({
   pkg: require('./package.json')
 });
