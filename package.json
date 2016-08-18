@@ -61,7 +61,7 @@
     "react-dom": "^15.2.1",
     "stylus": "^0.54.5",
     "webpack": "^1.10.1",
-    "yargs": "^4.8.0"
+    "yargs": "^5.0.0"
   },
   "dependencies": {
     "debug": "^2.2.0",
