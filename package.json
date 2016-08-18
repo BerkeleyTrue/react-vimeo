@@ -53,15 +53,13 @@
     "browser-sync": "^2.13.0",
     "eslint": "^3.1.0",
     "eslint-plugin-react": "^6.1.2",
-    "jest-cli": "^13.2.3",
     "lodash": "^4.13.1",
     "nib": "^1.1.0",
     "node-libs-browser": "^1.0.0",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "stylus": "^0.54.5",
-    "webpack": "^1.10.1",
-    "yargs": "^4.8.0"
+    "webpack": "^1.10.1"
   },
   "dependencies": {
     "debug": "^2.2.0",
