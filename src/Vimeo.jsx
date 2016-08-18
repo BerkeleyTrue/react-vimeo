@@ -137,8 +137,8 @@ export default React.createClass({
       try {
         data = JSON.parse(data);
       } catch (err) {
-        debug('error parsing message' , err);
-        dats = { event: '' };
+        debug('error parsing message', err);
+        data = { event: '' };
       }
     }
 
@@ -170,7 +170,9 @@ export default React.createClass({
   },
 
   getIframeUrl() {
-    return `//player.vimeo.com/video/${this.props.videoId}?${this.getIframeUrlQuery()}`;
+    const { videoId } = this.props;
+    const query = this.getIframeUrlQuery();
+    return `//player.vimeo.com/video/${videoId}?${query}`;
   },
 
   getIframeUrlQuery() {
@@ -178,7 +180,8 @@ export default React.createClass({
     Object.keys(this.props.playerOptions).forEach(key => {
       str.push(`${key}=${this.props.playerOptions[key]}`);
     });
-    return str.join("&");
+
+    return str.join('&');
   },
 
   fetchVimeoData() {
