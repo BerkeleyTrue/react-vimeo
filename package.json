@@ -53,7 +53,7 @@
     "browser-sync": "^2.13.0",
     "eslint": "^3.1.0",
     "eslint-plugin-react": "^6.1.2",
-    "jest-cli": "^13.2.3",
+    "jest-cli": "^14.1.0",
     "lodash": "^4.13.1",
     "nib": "^1.1.0",
     "node-libs-browser": "^1.0.0",
