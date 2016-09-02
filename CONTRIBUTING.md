@@ -31,7 +31,7 @@ So, have some scripts that you need to know to run the project locally. It's jus
 
 Command | Description
 ------- | -----------
-`npm run build` | run `$ wepback and babel` task
+`npm run build` | runs `$ wepback and babel` task
 `npm test` | lints files
 
 ## Submitting a Pull request
@@ -42,3 +42,20 @@ Command | Description
    feature/my-new-feature:feature/my-new-feature
 4. Submit a pull request :D
 5. DFTBA
+
+
+# [OpenOpenSource FTW](http://openopensource.org/)
+
+
+Individuals making significant and valuable contributions are given commit-access
+to the project to contribute as they see fit.
+This project is more like an open wiki than a
+standard guarded open source project.
+
+There are a few basic ground-rules for contributors:
+
+* No --force pushes or modifying the Git history in any way.
+* Non-master branches ought to be used for ongoing work.
+* External API changes and significant modifications ought to be subject to an internal pull-request to solicit feedback from other contributors.
+* Internal pull-requests to solicit feedback are encouraged for any other non-trivial contribution but left to the discretion of the contributor.
+* Contributors should attempt to adhere to the prevailing code-style.

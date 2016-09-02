@@ -1,11 +1,12 @@
 
 # API
 
-```js
+```jsx
 Interface props {
     videoId: String,
     className?: String = 'vimeo',
     playerOptions?: Object = { autoplay: 1 },
+    playButton?: ReactElement = <PlayButton />,
     onReady?(data?: Object) => Void,
     onCuechange?(data?: Object) => Void,
     onError?(data?: Object) => Void,
@@ -14,18 +15,23 @@ Interface props {
     onPause?(data?: Object) => Void,
     onPlay?(data?: Object) => Void,
     onPlayProgress?(data?: Object) => Void,
-    onSeek?(data?: Object) => Void
+    onSeek?(data?: Object) => Void,
 };
 ```
 
 ## videoId: String
-The Vimeo video ID
+The Vimeo video ID. This property is required
 
-## className: String
+## className?: String
 `className` applied to wrapping div
 
-## playerOptions: Object
+## playerOptions?: Object
 Object of player options as specified in Vimeo Player docs: https://developer.vimeo.com/player/embedding#universal-parameters. Will get appended to iframe URL
+
+## playButton?: ReactElement
+
+Provide a custom play button element. This element will be cloned and a
+`onClick` prop is added to manage starting the video
 
 ## onReady?(data: Object) => Void
 Called when video has loaded and is ready to play.
