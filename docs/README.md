@@ -16,6 +16,7 @@ Interface props {
     onPlay?(data?: Object) => Void,
     onPlayProgress?(data?: Object) => Void,
     onSeek?(data?: Object) => Void,
+    autoplay?: Boolean = false,
 };
 ```
 
@@ -62,5 +63,8 @@ Called when video play has progressed
 
 ## onSeek?(data: Object) => Void
 Called when user seeks ahead in video
+
+## autoplay?: Boolean = false
+If true, video will automatically play
 
 Interactive api (play/pause actions, seek to `n`, etc..) to come in future versions

@@ -26,6 +26,17 @@ To handle errors, you can pass a function to the `onError` prop:
   );
 ```
 
+To automatically play the video on page load:
+
+```javascript
+  var Vimeo = require('react-vimeo');
+
+  React.render(
+    <Vimeo videoId={ videoId } autoplay='true' />,
+    $mountNode
+  );
+```
+
 ## Behind the Scene
 
 There are some things that you should know about the component. The first one is the structure created inside by the component if you wish to stylize it.
