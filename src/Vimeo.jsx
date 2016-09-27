@@ -71,7 +71,6 @@ export default React.createClass({
   },
 
   getInitialState() {
-    console.log('autplay', this.props.autoplay);
     return {
       imageLoaded: false,
       playerOrigin: '*',
