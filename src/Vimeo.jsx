@@ -52,7 +52,8 @@ export default React.createClass({
     onSeek: PropTypes.func,
     playButton: PropTypes.node,
     videoId: PropTypes.string.isRequired,
-    playerOptions: PropTypes.object
+    playerOptions: PropTypes.object,
+    autoplay: PropTypes.bool
   },
 
   getDefaultProps() {
@@ -65,6 +66,7 @@ export default React.createClass({
 
     defaults.className = 'vimeo';
     defaults.playerOptions = { autoplay: 1 };
+    defaults.autoplay = false;
     return defaults;
   },
 
@@ -72,7 +74,7 @@ export default React.createClass({
     return {
       imageLoaded: false,
       playerOrigin: '*',
-      showingVideo: false,
+      showingVideo: this.props.autoplay,
       thumb: null
     };
   },
