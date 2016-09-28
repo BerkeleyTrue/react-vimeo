@@ -5,3 +5,4 @@ lib/*.js
 !lib/umd
 *.tgz
 .idea/
+.tern-project

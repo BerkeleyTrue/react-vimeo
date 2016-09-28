@@ -223,7 +223,9 @@ export default React.createClass({
       width: '100%'
     };
 
-    const playButton = this.props.playButton ? cloneElement(this.props.playButton, {onClick: this.playVideo }) : (<PlayButton onClick={ this.playVideo } />);
+    const playButton = this.props.playButton ?
+      cloneElement(this.props.playButton, { onClick: this.playVideo }) :
+      <PlayButton onClick={ this.playVideo } />;
 
     return (
       <div

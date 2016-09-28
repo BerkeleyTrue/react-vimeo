@@ -33,7 +33,7 @@
     "build-umd": "NODE_ENV=production webpack src/Vimeo.jsx lib/umd/ReactVimeo.js",
     "build-umd-compact": "NODE_ENV=production webpack -p src/Vimeo.jsx lib/umd/ReactVimeo.min.js",
     "build-size": "echo \"gzipped, the umd build is `gzip -c lib/umd/ReactVimeo.min.js | wc -c | sed -e 's/^[[:space:]]*//'` bytes\"",
-    "lint": "eslint .",
+    "lint": "eslint --ext=jsx,js .",
     "prepublish": "npm run test && npm run build",
     "test": "npm run lint"
   },
