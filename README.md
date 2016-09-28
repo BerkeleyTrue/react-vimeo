@@ -21,7 +21,7 @@ To handle errors, you can pass a function to the `onError` prop:
   };
 
   React.render(
-    <Video onError={ onError } videoId={ videoId } />
+    <Vimeo onError={ onError } videoId={ videoId } />
     document.querySelector('#your-div')
   );
 ```
