@@ -32,7 +32,7 @@ To automatically play the video on page load:
   var Vimeo = require('react-vimeo');
 
   React.render(
-    <Vimeo videoId={ videoId } autoplay='true' />,
+    <Vimeo videoId={ videoId } autoplay={true} />,
     $mountNode
   );
 ```
