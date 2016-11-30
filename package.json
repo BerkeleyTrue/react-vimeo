@@ -54,7 +54,7 @@
     "eslint": "^3.1.0",
     "eslint-plugin-react": "^6.1.2",
     "lodash": "^4.13.1",
-    "nib": "^1.1.0",
+    "nib": "^1.1.2",
     "node-libs-browser": "^1.0.0",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
