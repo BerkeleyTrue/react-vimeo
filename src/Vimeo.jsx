@@ -11,6 +11,7 @@ const noop = () => {};
 const playerEvents = keyMirror({
   cuechange: null,
   finish: null,
+  ended: null,
   loadProgress: null,
   pause: null,
   play: null,
@@ -44,6 +45,7 @@ export default React.createClass({
     onCuechange: PropTypes.func,
     onError: PropTypes.func,
     onFinish: PropTypes.func,
+    onEnded: PropTypes.func,
     onLoadProgress: PropTypes.func,
     onPause: PropTypes.func,
     onPlay: PropTypes.func,
