@@ -9,14 +9,16 @@ import Spinner from './Spinner';
 const debug = debugFactory('vimeo:player');
 const noop = () => {};
 const playerEvents = keyMirror({
-  cuechange: null,
-  finish: null,
+  cueChange: null,
   ended: null,
-  loadProgress: null,
+  loaded: null,
   pause: null,
   play: null,
-  playProgress: null,
-  seek: null
+  progress: null,
+  seeked: null,
+  textTrackChange: null,
+  timeUpdate: null,
+  volumeChange: null
 });
 
 function capitalize(str = '') {
@@ -40,22 +42,26 @@ export default React.createClass({
   displayName: 'Vimeo',
 
   propTypes: {
+    autoplay: PropTypes.bool,
     className: PropTypes.string,
     loading: PropTypes.element,
-    onCuechange: PropTypes.func,
-    onError: PropTypes.func,
-    onFinish: PropTypes.func,
+    playButton: PropTypes.node,
+    playerOptions: PropTypes.object,
+    videoId: PropTypes.string.isRequired,
+
+    // event callbacks
+    onCueChange: PropTypes.func,
     onEnded: PropTypes.func,
-    onLoadProgress: PropTypes.func,
+    onError: PropTypes.func,
+    onLoaded: PropTypes.func,
     onPause: PropTypes.func,
     onPlay: PropTypes.func,
-    onPlayProgress: PropTypes.func,
+    onProgress: PropTypes.func,
     onReady: PropTypes.func,
-    onSeek: PropTypes.func,
-    playButton: PropTypes.node,
-    videoId: PropTypes.string.isRequired,
-    playerOptions: PropTypes.object,
-    autoplay: PropTypes.bool
+    onSeeked: PropTypes.func,
+    onTextTrackChanged: PropTypes.func,
+    onTimeUpdate: PropTypes.func,
+    onVolumeChange: PropTypes.func
   },
 
   getDefaultProps() {
@@ -155,13 +161,22 @@ export default React.createClass({
       );
       return onReady(data);
     }
-
+    if (!data.event) {
+      // we get messages when the first event callbacks are added to the frame
+      return;
+    }
+    debug('firing event: ', data.event);
     getFuncForEvent(data.event, this.props)(data);
   },
 
   onReady(player, playerOrigin) {
     Object.keys(playerEvents).forEach(event => {
-      var err = post('addEventListener', event, player, playerOrigin);
+      var err = post(
+        'addEventListener',
+        event.toLowerCase(),
+        player,
+        playerOrigin
+      );
       if (err) {
         this.onError(err);
       }

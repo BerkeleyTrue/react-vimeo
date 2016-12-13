@@ -37,7 +37,7 @@ To automatically play the video on page load:
   );
 ```
 
-## Behind the Scene
+## Behind the Scenes
 
 There are some things that you should know about the component. The first one is the structure created inside by the component if you wish to stylize it.
 

@@ -1,24 +1,30 @@
-
 # API
 
 ```jsx
 Interface props {
-    videoId: String,
-    className?: String = 'vimeo',
-    playerOptions?: Object = { autoplay: 1 },
-    playButton?: ReactElement = <PlayButton />,
-    onReady?(data?: Object) => Void,
-    onCuechange?(data?: Object) => Void,
-    onError?(data?: Object) => Void,
-    onFinish?(data?: Object) => Void,
-    onLoadProgress?(data?: Object) => Void,
-    onPause?(data?: Object) => Void,
-    onPlay?(data?: Object) => Void,
-    onPlayProgress?(data?: Object) => Void,
-    onSeek?(data?: Object) => Void,
-    autoplay?: Boolean = false,
+  autoplay?: Boolean = false,
+  videoId: String,
+  className?: String = 'vimeo',
+  playerOptions?: Object = { autoplay: 1 },
+  playButton?: ReactElement = <PlayButton />,
+
+  onCueChange?(data?: Object) => Void,
+  onEnded?(data?: Object) => Void,
+  onError?(data?: Object) => Void,
+  onLoaded?(data?: Object) => Void,
+  onPause?(data?: Object) => Void,
+  onPlay?(data?: Object) => Void,
+  onProgress?(data?: Object) => Void,
+  onReady?(data?: Object) => Void,
+  onSeeked?(data?: Object) => Void,
+  onTextTrackChanged?(data?: Object) => Void,
+  onTimeUpdate?(data?: Object) => Void,
+  onVolumeChange?(data?: Object) => Void
 };
 ```
+
+## autoplay?: Boolean = false
+If true, video will automatically play
 
 ## videoId: String
 The Vimeo video ID. This property is required
@@ -34,23 +40,20 @@ Object of player options as specified in Vimeo Player docs: https://developer.vi
 Provide a custom play button element. This element will be cloned and a
 `onClick` prop is added to manage starting the video
 
-## onReady?(data: Object) => Void
-Called when video has loaded and is ready to play.
-Other event functions will not be called before this one other than onError
+## onCueChange?(data: Object) => Void
+Called when the active cue for the current text track changes.
+It also fires when the active text track changes.
+There may be multiple cues active.
 
-
-## onCuechange?(data: Object) => Void
-Called when the player que changes.
+## onEnded?(data: Object) => Void
+Called when video reaches the end
 
 ## onError?(data: Object) => Void
 Called in the event that there is an error.
 If no error handler provided, the error will be thrown.
 
-## onFinish?(data: Object) => Void
-Called when video completes
-
-## onLoadProgress?(data: Object) => Void
-Called when part of video has loaded
+## onLoaded?(data: Object) => Void
+Called when a new video is loaded in the player.
 
 ## onPause?(data: Object) => Void
 Called when video is paused
@@ -58,13 +61,26 @@ Called when video is paused
 ## onPlay?(data: Object) => Void
 Called when video is played
 
-## onPlayProgress?(data: Object) => Void
-Called when video play has progressed
+## onProgress?(data: Object) => Void
+Called as the video is loaded.
+Reports back the amount of the video that has been buffered.
 
-## onSeek?(data: Object) => Void
-Called when user seeks ahead in video
+## onReady?(data: Object) => Void
+Called when video has loaded and is ready to play.
+Other event functions will not be called before this one other than onError
 
-## autoplay?: Boolean = false
-If true, video will automatically play
+## onSeeked?(data: Object) => Void
+Called when the player seeks to a specific time.
+`onTimeUpdate` will also be called at the same time.
 
-Interactive api (play/pause actions, seek to `n`, etc..) to come in future versions
+## onTextTrackChanged?(data: Object) => Void
+Triggered when the active text track (captions/subtitles) changes.
+The values will be null if text tracks are turned off.
+
+## onTimeUpdate?(data: Object) => Void
+Called as the current time of the video updates. It generally fires every 250ms, but it may vary depending on the browser.
+
+## onVolumeChange?(data: Object) => Void
+Triggered when the volume in the player changes.
+Some devices do not support setting the volume of the video independently from the system volume,
+so this event will never fire on those devices.
