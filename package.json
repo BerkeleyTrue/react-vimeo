@@ -62,7 +62,7 @@
     "webpack": "^1.10.1"
   },
   "dependencies": {
-    "debug": "^2.2.0",
+    "debug": "^2.4.0",
     "jsonp": "^0.2.0",
     "keymirror": "^0.1.1"
   }
