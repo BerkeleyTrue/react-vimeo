@@ -23,7 +23,6 @@ Interface props {
   onVolumeChange?(data?: Object) => Void
 };
 ```
-## Customization of the player
 
 ### autoplay?: Boolean = false
 If true, video will automatically play
@@ -43,8 +42,6 @@ Object of player options as specified in Vimeo Player docs: https://developer.vi
 
 ### videoId: String
 The Vimeo video ID. This property is required
-
-## Callbacks
 
 ### onCueChange?(data: Object) => Void
 Called when the active cue for the current text track changes.
