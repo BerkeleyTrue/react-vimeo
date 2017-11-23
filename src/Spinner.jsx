@@ -5,8 +5,8 @@ import React from 'react';
  * React component for Vimeo Loading Spinner created and rendered.
  * SVG Path is used for creating the spinner.
  */
-export default React.createClass({
-  displayName: 'Spinner',
+export default class extends React.Component {
+  static displayName = 'Spinner';
 
   render() {
     return (
@@ -24,4 +24,4 @@ export default React.createClass({
       </div>
     );
   }
-});
+}

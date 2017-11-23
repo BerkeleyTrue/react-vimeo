@@ -2,12 +2,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export default React.createClass({
-  displayName: 'PlayButton',
+export default class extends React.Component {
+  static displayName = 'PlayButton';
 
-  propTypes: {
+  static propTypes = {
     onClick: PropTypes.func
-  },
+  };
 
   render() {
     return (
@@ -24,4 +24,4 @@ export default React.createClass({
       </button>
     );
   }
-});
+}
