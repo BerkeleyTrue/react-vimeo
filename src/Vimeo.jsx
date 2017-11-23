@@ -152,10 +152,9 @@ export default class extends React.Component {
     }
 
     if (data.event === 'ready') {
-      const { player } = this.refs;
       debug('player ready');
       this.onReady(
-        player,
+        this._player,
         playerOrigin === '*' ? origin : playerOrigin
       );
       return onReady(data);
@@ -271,7 +270,9 @@ export default class extends React.Component {
         style={ embedVideoStyle }>
         <iframe
           frameBorder='0'
-          ref='player'
+          ref={el => {
+            this._player = el;
+          }}
           src={ this.getIframeUrl() } />
       </div>
     );
