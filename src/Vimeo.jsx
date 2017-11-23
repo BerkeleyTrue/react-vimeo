@@ -65,7 +65,7 @@ export default class extends React.Component {
     onVolumeChange: PropTypes.func
   };
 
-  static defaultProps = function() {
+  static defaultProps = (function() {
     const defaults = Object.keys(playerEvents)
       .concat(['ready'])
       .reduce((defaults, event) => {
@@ -77,7 +77,7 @@ export default class extends React.Component {
     defaults.playerOptions = { autoplay: 1 };
     defaults.autoplay = false;
     return defaults;
-  }();
+  })();
 
   state = {
     imageLoaded: false,
