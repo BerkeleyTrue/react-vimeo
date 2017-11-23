@@ -1,11 +1,12 @@
 /* eslint-disable max-len */
+import PropTypes from 'prop-types';
 import React from 'react';
 
 export default React.createClass({
   displayName: 'PlayButton',
 
   propTypes: {
-    onClick: React.PropTypes.func
+    onClick: PropTypes.func
   },
 
   render() {

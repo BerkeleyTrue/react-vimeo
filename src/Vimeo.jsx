@@ -1,4 +1,5 @@
-import React, { PropTypes, cloneElement } from 'react';
+import PropTypes from 'prop-types';
+import React, { cloneElement } from 'react';
 import keyMirror from 'keymirror';
 import jsonp from 'jsonp';
 import debugFactory from 'debug';
