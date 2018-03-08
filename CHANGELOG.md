@@ -1,3 +1,10 @@
+# March 07, 2018, 2018, v2.0.0
+
+Breaking Changes:
+
+* [1ffe820](../../commit/1ffe820) fix: update to React 16
+* [e5b2842](../../commit/e5b2842) fix: use prop-types package to make work with React 16
+
 # September 27, 2016 v0.2.2
 
 This release adds the abiltity to override play button logic
