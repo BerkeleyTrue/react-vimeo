@@ -56,8 +56,9 @@
     "lodash": "^4.13.1",
     "nib": "^1.1.0",
     "node-libs-browser": "^1.0.0",
-    "react": "^15.2.1",
-    "react-dom": "^15.2.1",
+    "prop-types": "^15.6.0",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
     "stylus": "^0.54.5",
     "webpack": "^1.10.1"
   },

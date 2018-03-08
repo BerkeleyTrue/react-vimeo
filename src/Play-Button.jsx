@@ -1,12 +1,13 @@
 /* eslint-disable max-len */
+import PropTypes from 'prop-types';
 import React from 'react';
 
-export default React.createClass({
-  displayName: 'PlayButton',
+export default class extends React.Component {
+  static displayName = 'PlayButton';
 
-  propTypes: {
-    onClick: React.PropTypes.func
-  },
+  static propTypes = {
+    onClick: PropTypes.func
+  };
 
   render() {
     return (
@@ -23,4 +24,4 @@ export default React.createClass({
       </button>
     );
   }
-});
+}
