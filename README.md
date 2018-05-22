@@ -1,5 +1,7 @@
 # React Vimeo
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/BerkeleyTrue/react-vimeo.svg)](https://greenkeeper.io/)
+
 [![NPM](https://nodei.co/npm/react-vimeo.png?downloads=true)](https://nodei.co/npm/react-vimeo/)
 
 ## Usage
